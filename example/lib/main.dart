@@ -43,36 +43,36 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Chatwoot Example"),
-      ),
-      body: ChatwootWidget(
-        websiteToken: "websiteToken",
-        baseUrl: "https://app.chatwoot.com",
-        user: ChatwootUser(
-          identifier: "test@test.com",
-          name: "Tester test",
-          email: "test@test.com",
+      body: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: ChatwootWidget(
+          websiteToken: "FU7SSnMcYLJ5LFauGSUY5kUA",
+          baseUrl: "https://support.yayawallet.com",
+          user: ChatwootUser(
+            identifier: "test@test.com",
+            name: "Tester test",
+            email: "test@test.com",
+          ),
+          locale: "en",
+          closeWidget: () {
+            if (Platform.isAndroid) {
+              SystemNavigator.pop();
+            } else if (Platform.isIOS) {
+              exit(0);
+            }
+          },
+          //attachment only works on android for now
+          onAttachFile: _androidFilePicker,
+          onLoadStarted: () {
+            print("loading widget");
+          },
+          onLoadProgress: (int progress) {
+            print("loading... ${progress}");
+          },
+          onLoadCompleted: () {
+            print("widget loaded");
+          },
         ),
-        locale: "en",
-        closeWidget: () {
-          if (Platform.isAndroid) {
-            SystemNavigator.pop();
-          } else if (Platform.isIOS) {
-            exit(0);
-          }
-        },
-        //attachment only works on android for now
-        onAttachFile: _androidFilePicker,
-        onLoadStarted: () {
-          print("loading widget");
-        },
-        onLoadProgress: (int progress) {
-          print("loading... ${progress}");
-        },
-        onLoadCompleted: () {
-          print("widget loaded");
-        },
       ),
     );
   }
